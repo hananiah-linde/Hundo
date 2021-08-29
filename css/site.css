@@ -65,6 +65,10 @@ code[class*="language-"], pre[class*="language-"] {
     word-wrap: break-word;
 }
 
+.logoFont {
+    font-family: 'Racing Sans One', cursive;
+}
+
 .sticky-nav {
     position: fixed;
     left: 0;

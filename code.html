@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project By Hananiah Linde</title>
+    <title>HUNDO: A Coding Project By Hananiah Linde</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,14 +13,18 @@
     <link rel="stylesheet" href="/css/site.css">
     <link rel="stylesheet" href="css/prism.css">
     <link rel="icon" type="img/svg" href="/img/favicon.ico">
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
 </head>
 
 <body class="d-flex flex-column h-100">
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"> <img src="img/tab_icon.svg" class="d-inline-block align-text-top"
-                    alt="logo" width="30" height="24"> APP NAME</a>
+            <a class="navbar-brand logoFont" href="#"> <img src="img/tab_icon.svg" class="d-inline-block align-text-top"
+                    alt="logo" width="30" height="24"> HUNDO</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -37,7 +41,7 @@
                         <a class="nav-link active" aria-current="page" href="code.html">The Code</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="#">Git Repo</a>
+                        <a class="nav-link" target="_blank" href="https://github.com/hananiah-linde/Hundo">Git Repo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" target="_blank" href="http://hananiahlinde.com/">About</a>
@@ -54,17 +58,78 @@
                 <div class="col-lg-8">
                     <pre class="line-numbers">
                         <code class="language-javascript">
-                            //Call Hello World
-                            function HelloWorld() {
-                            alert("Hello World");
+                            //Get the values from the Page
+                            //starts or controller function
+                            function getValues() {
+                            
+                                let startValue = document.getElementById("startValue").value;
+                                let endValue = document.getElementById("endValue").value;
+                            
+                                startValue = parseInt(startValue);
+                                endValue = parseInt(endValue);
+                            
+                                if (Number.isInteger(startValue) && Number.isInteger(endValue)) {
+                                    let numbers = generateNumbers(startValue, endValue);
+                                    displayNumbers(numbers);
+                                } else {
+                                    alert("You must enter integers");
+                                }
+                            
+                            }
+                            
+                            //Generate numbers from startValue to endValue
+                            //logic function(s)
+                            function generateNumbers(startValue, endValue) {
+                            
+                                let numbers = [];
+                                for (let index = startValue; index <= endValue; index++) {
+                                    numbers.push(index);
+                                }
+                            
+                                return numbers;
+                            
+                            }
+                            
+                            //display the numbers (with even numbers bold)
+                            //display or view function(s)
+                            function displayNumbers(numbers) {
+                            
+                                let templateRows = "";
+                            
+                                for (let index = 0; index < numbers.length; index++) {
+                            
+                                    let number = numbers[index];
+                                    if (number % 2 == 0) {
+                                        templateRows += `<tr><td><strong>${number}</strong></td></tr>`;
+                                        //This ^ does not render correctly with PrismJS as seen on webpage
+                                        //See source code for actual code.
+                                    } else {
+                                        templateRows += `<tr><td>${number}</td></tr>`;
+                                    }
+                            
+                                }
+                            
+                                if (numbers.length == 0) {
+                                    document.getElementById("results").innerHTML = `<tr><td>Start value must be less than end value</td></tr>`
+                                } else {
+                                    document.getElementById("results").innerHTML = templateRows;
+                                }
+                            
                             }
                         </code>
                     </pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The Code is structured in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World" </p>
+                    <p>The Code is structured into three functions following the principle of separation of concerns.</p>
+                    <h5>getValues</h5>
+                    <p>getValues is the controller function which is called when the Button is pressed </p>
+                    <p>The Code is structured into three functions following the principle of separation of concerns.</p>
+                    <h5>generateNumbers</h5>
+                    <p>generateNumbers is a function which is called from getValues if the supplied inputs are integers.
+                       This function populates an array with all the numbers between the two inputs.</p>
+                    <h5>displayNumbers</h5>
+                    <p>displayNumbers is a function which is called from getValues.
+                       This function loops through the array and creates the HTML elements that are displayed on the page.</p>
                 </div>
             </div>
         </div>
